@@ -12,6 +12,7 @@ import time
 
 start_time = time.perf_counter()
 
+
 def crypto_prediction():
     crypto_currency = 'XRP'
     against_currency = 'USD'
@@ -32,7 +33,7 @@ def crypto_prediction():
     future_day = 30
     
     x_train, y_train = [], []
-     
+    
     for x in range(prediction_days, len(scaled_data) - future_day):
         x_train.append(scaled_data[x-prediction_days:x, 0])
         y_train.append(scaled_data[x + future_day, 0])
@@ -41,7 +42,6 @@ def crypto_prediction():
     x_train = np.reshape(x_train, (x_train.shape[0], x_train.shape[1], 1))
     
     
-    # numpy=1.19.5
     # Creating the Neural Network
     model = Sequential()
     
@@ -102,17 +102,17 @@ def crypto_prediction():
     # Predict the upcoming day
     real_data = [model_inputs[len(model_inputs) + 1 - prediction_days: len(model_inputs) + 1, 0]]
     real_data = np.array(real_data)
-    real_data = np.reshape(x_test, (x_test[0], real_data.shape[1], 1))
+    real_data = np.reshape(real_data, (real_data.shape[0], real_data.shape[1], 1))
     
     prediction = model.predict(real_data)
     prediction = scaler.inverse_transform(prediction)
     print(f"\n\n Prediction: {prediction}")
     
-    
-    
-with concurrent.futures.ThreadPoolExecutor() as executor:
-    executor.map(crypto_prediction())
-    time.sleep(1)
+
+if __name__ == "__main__":
+    with concurrent.futures.ThreadPoolExecutor() as executor:
+        executor.map(crypto_prediction())
+        time.sleep(1)
 
 
 end_time = time.perf_counter()

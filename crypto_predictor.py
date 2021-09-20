@@ -20,7 +20,8 @@ def crypto_prediction():
     end_date = dt.datetime.now()
 
     data = web.DataReader(
-        f'{crypto_currency}-{against_currency}', 'yahoo', start_date, end_date
+        f'{crypto_currency}-{against_currency}',
+        'yahoo', start_date, end_date
         )
 
 

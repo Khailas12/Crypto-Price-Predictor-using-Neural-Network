@@ -12,7 +12,6 @@ import time
 
 start_time = time.perf_counter()
 
-
 def crypto_prediction():
     crypto_currency = 'XRP'
     against_currency = 'USD'
@@ -23,6 +22,7 @@ def crypto_prediction():
     data = web.DataReader(
         f'{crypto_currency}-{against_currency}', 'yahoo', start_date, end_date
         )
+
 
     # data preparation
     print(data.head())
@@ -54,7 +54,6 @@ def crypto_prediction():
     model.add(LSTM(units=50))
     model.add(Dropout(0.2))
     
-
     model.add(Dense(units=1))    # indicates the price from bunch of diff values into one number
     
     model.compile(optimizer='adam', loss='mean_squared_error')
@@ -109,11 +108,11 @@ def crypto_prediction():
     print(f"\n\n Prediction: {prediction}")
     
 
+# Threading
 if __name__ == "__main__":
     with concurrent.futures.ThreadPoolExecutor() as executor:
         executor.map(crypto_prediction())
         time.sleep(1)
-
 
 end_time = time.perf_counter()
 total_time = end_time - start_time

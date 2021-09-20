@@ -13,7 +13,7 @@ import time
 start_time = time.perf_counter()
 
 def crypto_prediction():
-    crypto_currency = 'XRP'
+    crypto_currency = 'XRP' # Ripple
     against_currency = 'USD'
 
     start_date = dt.datetime(2016, 1, 1)

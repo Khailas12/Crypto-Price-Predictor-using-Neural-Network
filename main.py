@@ -29,13 +29,13 @@ def crypto_prediction():
     scaled_data = scaler.fit_transform(data['Close'].values.reshape(-1, 1))
     
     prediction_days = 60    #60 days
+    future_day = 30
     
     x_train, y_train = [], []
-    
-    
-    for x in range(prediction_days, len(scaled_data)):
+     
+    for x in range(prediction_days, len(scaled_data) - future_day):
         x_train.append(scaled_data[x-prediction_days:x, 0])
-        y_train.append(scaled_data[x, 0])
+        y_train.append(scaled_data[x + future_day, 0])
     
     x_train, y_train = np.array(x_train), np.array(y_train)
     x_train = np.reshape(x_train, (x_train.shape[0], x_train.shape[1], 1))
@@ -97,6 +97,16 @@ def crypto_prediction():
     plt.ylabel('Price')  # y axis
     plt.legend(loc='upper left')
     plt.show()
+    
+
+    # Predict the upcoming day
+    real_data = [model_inputs[len(model_inputs) + 1 - prediction_days: len(model_inputs) + 1, 0]]
+    real_data = np.array(real_data)
+    real_data = np.reshape(x_test, (x_test[0], real_data.shape[1], 1))
+    
+    prediction = model.predict(real_data)
+    prediction = scaler.inverse_transform(prediction)
+    print(f"\n\n Prediction: {prediction}")
     
     
     

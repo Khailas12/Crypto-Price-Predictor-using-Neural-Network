@@ -1,0 +1,10 @@
+MinMaxScaler -> 
+A way to normalize the input features/variables is the Min-Max scaler. Features will be transformed into the range [0,1] meaning that the minimum and maximum value of a feature/variable is going to be 0 and 1
+
+LSTM -> Long Short Term Memory
+
+Dense -> the only actual network layer in that model. A Dense layer feeds all outputs from the previous layer to all its neurons, each neuron providing one output to the next layer. It's the most basic layer in neural networks. A Dense(10) has ten neurons.
+
+Dropout -> It consists in randomly setting a fraction rate of input units to 0 at each update during training time, which helps prevent overfitting. The units that are kept are scaled by 1 / (1 - rate) , so that their sum is unchanged at training time and inference time.
+
+Sequential -> The sequential API allows you to create models layer-by-layer for most problems. It is limited in that it does not allow you to create models that share layers or have multiple inputs or outputs.
